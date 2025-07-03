@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+<head>
+    <style>
+        body {
+            background-image: url('0101.jpg');
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .login-container {
+            background-color: #d3d3d3; 
+            border-radius: 5rem;
+            padding: 2rem; 
+            width: 100%; 
+            max-width: 800px; 
+        }
+
+        .header-text {
+            color: #000000; 
+            font-size: 2rem;
+            font-family: 'Inter', sans-serif; 
+            font-weight: 800;
+            text-align: center; 
+            margin-bottom: 1rem; 
+            text-transform: uppercase; 
+        }
+
+        .footer-text {
+            color: #808080; 
+            font-size: 1.2rem; 
+            text-align: center; 
+            margin-top: 2rem; 
+            font-family: 'Inter', sans-serif; 
+            font-weight: 600;
+            width: 100%; 
+        }
+
+        .footer-link {
+            color: #A020F0; 
+            font-weight: 700; 
+        }
+
+        .form-input {
+            width: 70%; /* Largura de cada campo de entrada */
+            height: 2.5rem; /* Aumenta a altura da caixa de entrada */
+            font-size: 2.2rem; /* Aumenta o tamanho da fonte */
+            margin-right: 1%; /* Reduz o espaçamento entre os campos */
+        }
+
+        .form-input:last-child {
+            margin-right: 0; /* Remove o espaço extra após o último campo */
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://serwer2340828.home.pl/wwwroot/css/tailwind.output.css" />
+    <script
+        src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+        defer
+    ></script>
+    <script src="/public/scripts/init-alpine.js"></script>
+</head>
+<body class="bg-black">
+    <div class="flex items-center min-h-screen p-6">
+        <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-transparent rounded-lg shadow-xl">
+            <div class="flex items-center justify-center flex-col overflow-y-auto md:flex-row">
+                <div class="flex flex-col items-center justify-center p-6 sm:p-12 w-full">
+                    <div class="w-full login-container">
+                        <h1 class="header-text">MylrX Radar</h1>
+                        <h2 class="mb-4 text-xl font-semibold text-gray-200">Login</h2>
+                        <form method="post" action="/login">
+                            <div class="form-row">
+                                <label class="block text-sm">
+                                    <span class="text-gray-200">Usuário</span>
+                                    <input
+                                        class="form-input text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray"
+                                        placeholder="Username"
+                                        id="UserName"
+                                        name="username"
+                                    />
+                                </label>
+                                <label class="block text-sm">
+                                    <span class="text-gray-200">Senha</span>
+                                    <input
+                                        class="form-input text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray"
+                                        placeholder="*******"
+                                        type="password"
+                                        id="PassWord"
+                                        name="password"
+                                    />
+                                </label>
+                            </div>
+                            <label class="block">
+                                <input type="checkbox" class="text-sm" name="savePassword" id="savePassword" />
+                                <span class="text-gray-200">Salvar senha</span>
+                            </label>
+                            <button
+                                class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                                type="submit"
+                                onclick="savePasswordFunc()"
+                            >
+                                Log in
+                            </button>
+                        </form>
+                        <div class="footer-text">
+                            Caso não tenha login e senha, solicitar no Discord, <a href="https://discord.gg/UgQearM6YZ" class="footer-link">link</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var isSavePasswordEnable = localStorage.getItem("isSavePasswordEnable");
+        var password = document.getElementById("PassWord");
+        var username = document.getElementById("UserName");
+        var checkbox = document.getElementById("savePassword");
+
+        if (isSavePasswordEnable != null) {
+            if (isSavePasswordEnable == "true") {
+                password.value = localStorage.getItem("savedPassword");
+                username.value = localStorage.getItem("savedUsername");
+                checkbox.checked = true;
+            } else {
+                checkbox.checked = false;
+            }
+        } else {
+            checkbox.checked = false;
+        }
+
+        function savePasswordFunc() {
+            if (checkbox.checked) {
+                localStorage.setItem("isSavePasswordEnable", "true");
+                localStorage.setItem("savedPassword", password.value);
+                localStorage.setItem("savedUsername", username.value);
+            } else {
+                localStorage.setItem("isSavePasswordEnable", "false");
+            }
+        }
+    </script>
+</body>
+</html>

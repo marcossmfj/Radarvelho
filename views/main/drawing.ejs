@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MyrlX Youtube :D</title>
+    <style>
+        body {
+            background-color: #121317;
+        }
+
+        /* Position the canvases */
+        #mapCanvas, #gridCanvas, #ourPlayerCanvas, #drawCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 10px;
+        }
+
+        #gridCanvas, #playersCanvas, #rightCanvas {
+            border: 2px solid grey;
+        }
+
+        #rightCanvas {
+            position: absolute;
+            top: 520px; /* Position below the mapCanvas */
+            left: 0; /* Align with the mapCanvas */
+            margin: 10px;
+            width: 500px;
+            height: 500px;
+            overflow-y: auto; /* Add vertical scroll if content overflows */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        #playersCanvas {
+            position: relative; /* Change to relative to stay inside the container */
+            width: 100%;
+            height: 100%;
+        }
+
+        #buttonContainer, #volumeContainer {
+            position: absolute;
+            background-color: #1a1c23;
+            color: white;
+            margin: 10px;
+            border: 1px solid gray;
+            padding: 8px 18px;
+            cursor: pointer;
+        }
+
+        #buttonContainer {
+            top: 0; /* Align with the top of the map canvas */
+            left: 520px; /* Position to the right of the map canvas */
+        }
+
+        #volumeContainer {
+            top: 200px; /* Position below the button container */
+            left: 520px; /* Align with the button container */
+        }
+
+        #button, #logEnemiesList, #sonarButton, #announcerButton {
+            margin: 10px;
+            background-color: #1a1c23;
+            color: white;
+            border: 1px solid gray;
+            padding: 8px 18px;
+            cursor: pointer;
+        }
+
+        #volumeLabel, #volumeSlider, #playerVolumeLabel, #playerVolumeSlider, #announcerVolumeLabel, #announcerVolumeSlider {
+            display: block;
+            margin: 10px;
+        }
+
+        #volumeLabel, #playerVolumeLabel, #announcerVolumeLabel {
+            background-color: transparent;
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+
+        #canvasContainer {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvasContainer">
+        <canvas id="mapCanvas" width="500" height="500"></canvas>
+        <canvas id="gridCanvas" width="500" height="500"></canvas>
+        <canvas id="ourPlayerCanvas" width="500" height="500"></canvas>
+        <canvas id="drawCanvas" width="500" height="500"></canvas>
+        <div id="rightCanvas">
+            <canvas id="playersCanvas" width="500" height="500"></canvas>
+        </div>
+        <div id="buttonContainer">
+            <button id="button">Clear</button>
+            <button id="logEnemiesList">Log Enemies List</button>
+            <button id="sonarButton">Enable Sonar</button>
+            <button id="announcerButton">Enable Player Direction Announcer</button> <!-- New button -->
+        </div>
+        <div id="volumeContainer">
+            <label id="volumeLabel" for="volumeSlider">Sonar Volume:</label>
+            <input type="range" id="volumeSlider" min="0" max="100" value="2">
+            <label id="playerVolumeLabel" for="playerVolumeSlider">Player Detected Volume:</label>
+            <input type="range" id="playerVolumeSlider" min="0" max="100" value="50">
+            <label id="announcerVolumeLabel" for="announcerVolumeSlider">Announcer Volume:</label>
+            <input type="range" id="announcerVolumeSlider" min="0" max="100" value="50"> <!-- New volume slider -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.10/signalr.min.js"></script>
+    <script src="/scripts/Handlers/HarvestablesHandler.js"></script>
+    <script src="/scripts/Handlers/ChestsHandler.js"></script>
+    <script src="/scripts/Handlers/DungeonsHandler.js"></script>
+    <script src="/scripts/Handlers/Map.js"></script>
+    <script src="/scripts/Handlers/ItemsInfo.js"></script>
+    <script src="/scripts/Handlers/FactionFlagInfo.js"></script>
+    <script src="/scripts/Utils/DrawingUtils.js"></script>
+    <script src="/scripts/Utils/Settings.js"></script>
+    
+    <script type="module" src="/scripts/Utils/Utils.js"></script>
+</body>
+</html>
